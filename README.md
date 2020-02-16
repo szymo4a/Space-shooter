@@ -1,5 +1,5 @@
 # Space-shooter
-One day, hopefulfy a full game
+One day, hopefulfy a full game made using THREE.js
 
 
 You are welcome to observe and learn from me (and my mistakes, so do it at your own risk :) ), but do not use my code as your own and don't publish it..
