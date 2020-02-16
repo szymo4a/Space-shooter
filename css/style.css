@@ -1,0 +1,23 @@
+/*
+    Created by Szymon Krawczyk 2020
+*/
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  background-color: black;
+}
+
+
+	
+canvas {
+	/* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+	z-index: -10;
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
