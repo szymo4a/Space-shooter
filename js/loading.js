@@ -153,6 +153,39 @@
 			secondShipTexture = new MyTexture('ships/ship2.png', 1, 1, false);
 			loadingBoolTable.push(secondShipTexture);
 			loadingBoolTableHelp.push(false);
+
+
+			startingProjectileS1 = new MyTexture('projectiles/projectile0_0.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileS1);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileS2 = new MyTexture('projectiles/projectile0_1.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileS2);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileS3 = new MyTexture('projectiles/projectile0_2.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileS3);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileS4 = new MyTexture('projectiles/projectile0_3.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileS4);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileL1 = new MyTexture('projectiles/projectile1_0.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileL1);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileL2 = new MyTexture('projectiles/projectile1_1.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileL2);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileL3 = new MyTexture('projectiles/projectile1_2.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileL3);
+			loadingBoolTableHelp.push(false);
+
+			startingProjectileL4 = new MyTexture('projectiles/projectile1_3.png', 1, 1, false);
+			loadingBoolTable.push(startingProjectileL4);
+			loadingBoolTableHelp.push(false);
 		//
 
 		const checkIfLoaded = () => {
@@ -167,6 +200,8 @@
 
 			if ((loaded+1) ==(loadingBoolTable.length+1)) {
 				buildShips();
+				buildProjectilesS();
+				buildProjectilesL();
 				setTimeout(mainMenu, 500);
 				return;
 			} else {

@@ -22,3 +22,34 @@ const buildShips = () => {
 
 	console.log(shipTab);
 }
+
+
+//
+
+
+let projectileSTab = [];
+let startingProjectileS;
+
+const buildProjectilesS = () => {
+
+	startingProjectileS = new ImgAndHitboxes (startingProjectileS1.texture, 1, 2);
+	startingProjectileS.addAnimationFrame(startingProjectileS2.texture);
+	startingProjectileS.addAnimationFrame(startingProjectileS3.texture);
+	startingProjectileS.addAnimationFrame(startingProjectileS4.texture);
+	startingProjectileS.addHitbox(new Hitbox(0, 0, 0.5, 1));
+	projectileSTab.push(startingProjectileS);
+}
+
+let projectileLTab = [];
+
+let startingProjectileL;
+
+const buildProjectilesL = () => {
+
+	startingProjectileL = new ImgAndHitboxes (startingProjectileL1.texture, 2, 1.2);
+	startingProjectileL.addAnimationFrame(startingProjectileL2.texture);
+	startingProjectileL.addAnimationFrame(startingProjectileL3.texture);
+	startingProjectileL.addAnimationFrame(startingProjectileL4.texture);
+	startingProjectileL.addHitbox(new Hitbox(0, 0, 1.6, 0.6));
+	projectileLTab.push(startingProjectileL);
+}

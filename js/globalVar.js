@@ -2,7 +2,6 @@
 //  Created by Szymon Krawczyk 2020
 //
 
-
 // Height and width in 16:8 ratio
 	let myWidth  = window.innerWidth;
 	let myHeight = window.innerHeight;
@@ -56,6 +55,11 @@
 		let player;	
 	//
 
+	// Game Variables
+
+		let PlayerProjectilesTab = [];
+	//
+
 	// Textures
 
 		let menuArrowTexture;
@@ -79,6 +83,17 @@
 		let startingShipTexture3;
 		let startingShipTexture4;
 		let secondShipTexture;
+
+
+		let startingProjectileS1;
+		let startingProjectileS2;
+		let startingProjectileS3;
+		let startingProjectileS4;
+
+		let startingProjectileL1;
+		let startingProjectileL2;
+		let startingProjectileL3;
+		let startingProjectileL4;
 
 	//
 

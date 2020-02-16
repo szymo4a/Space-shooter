@@ -2,9 +2,12 @@
 //  Created by Szymon Krawczyk 2020
 //
 
+//gdy gameover: PlayerProjectilesTab.length = 0!!!
+
 const game = () => {
 
 	clearScene();
+
 
 	let pressingSpace = false;
 	let canShot = true;
@@ -172,6 +175,32 @@ const game = () => {
 		}
 	}
 
+	const animatePlayerProjectiles = () => {
+
+		for (var i = 0; i < PlayerProjectilesTab.length; i++) {
+			if (typeof PlayerProjectilesTab[i] != 'undefined') {
+				PlayerProjectilesTab[i].goToTarget();
+				PlayerProjectilesTab[i].animate();
+			}
+		}
+	}
+
+	const discardProjectiles = () => {
+		for (var i = 0; i < PlayerProjectilesTab.length; i++) {
+			if (typeof PlayerProjectilesTab[i] != 'undefined') {
+				if (PlayerProjectilesTab[i].Group.position.y >= 1.5*16) {
+
+					PlayerProjectilesTab[i].Group.position.z = 100;
+					scene.remove(PlayerProjectilesTab[i].Group);
+					delete PlayerProjectilesTab[i];
+					//console.log(PlayerProjectilesTab[i]);
+				}
+			}
+		}
+	}
+
+
+
 	const animate = () => {
 
 		GameSpeed = 1;
@@ -191,7 +220,10 @@ const game = () => {
 
 		player.animate();
 
-		//console.log(GameSpeed);
+		discardProjectiles();
+		animatePlayerProjectiles();
+
+		//console.log(PlayerProjectilesTab);
 
 
 		setTimeout(animate, 1000/Tickrate);

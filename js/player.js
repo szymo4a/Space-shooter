@@ -129,6 +129,13 @@ shoot(force) {
 
 		this.addRecoil(0.75);
 
+		let tempProj = new Projectile(projectileLTab[0], 2);
+		tempProj.position(this.Group.position.x, this.Group.position.y);
+		tempProj.target(this.Group.position.x, this.Group.position.y + 1);
+		tempProj.addToScene();
+		PlayerProjectilesTab.push(tempProj);
+		PlayerProjectilesTab[PlayerProjectilesTab.length-1].addToScene();
+
 	} else if (force > 0){
 
 		console.log('SmolShot');
@@ -138,6 +145,12 @@ shoot(force) {
 
 		this.addRecoil(0.15);
 
+		let tempProj = new Projectile(projectileSTab[0]);
+		tempProj.position(this.Group.position.x, this.Group.position.y);
+		tempProj.target(this.Group.position.x, this.Group.position.y + 1);
+		tempProj.addToScene();
+		PlayerProjectilesTab.push(tempProj);
+		PlayerProjectilesTab[PlayerProjectilesTab.length-1].addToScene();
 	}
 }
 
