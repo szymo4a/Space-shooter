@@ -131,6 +131,10 @@
 			loadingBoolTable.push(settingsBackTexture);
 			loadingBoolTableHelp.push(false);
 
+			settingsMenuTexture = new MyTexture('Button_Menu.png');
+			loadingBoolTable.push(settingsMenuTexture);
+			loadingBoolTableHelp.push(false);
+
 
 
 			startingShipTexture1 = new MyTexture('ships/ship1_0.png', 1, 1, false);

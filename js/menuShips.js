@@ -32,7 +32,7 @@ const shipsMenu = () => {
 
 	yShButtonPositions.push(yShButtonPositions[yShButtonPositions.length-1] - (1+2+(shipTab[shipTab.length-1].height)/2));
 
-	console.log(yShButtonPositions);
+	//console.log(yShButtonPositions);
 
 	settingsBackTexture.texture.magFilter = THREE.NearestFilter;
 	settingsBackTexture.texture.minFilter = THREE.NearestFilter;
@@ -117,7 +117,7 @@ const shipsMenu = () => {
 					return;
 				} else {
 					CurrentShip = currentArrowPosition;
-					console.log(`CurrentShip: ${CurrentShip}`);
+					//console.log(`CurrentShip: ${CurrentShip}`);
 				}				
 			}
 			canEnter = false;

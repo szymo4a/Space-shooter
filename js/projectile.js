@@ -4,7 +4,7 @@
 
 class Projectile {
 
-constructor (proj, damage = 1, speed = 0.1) {
+constructor (proj, damage = 1, speed = 0.2) {
 
 	this.speed = speed;
 	this.damage = damage;
@@ -21,8 +21,9 @@ constructor (proj, damage = 1, speed = 0.1) {
 		this.Group.add(this.hitboxTab[i].box)
 	}
 
+	this.animationDurationMultiplayer = 0.5;
 	this.animationFrames = proj.animationFrameTab;
-	this.maxAnimationCounter = (TickrateMultiplayer*64)/this.animationFrames.length;
+	this.maxAnimationCounter = 64*this.animationDurationMultiplayer/this.animationFrames.length;
 	this.currentAnimationCounter = 0;
 	this.currentAnimationFrame = 0;
 	for (let i = 0; i < this.animationFrames.length; i++) {
@@ -34,13 +35,14 @@ constructor (proj, damage = 1, speed = 0.1) {
 }
 
 animate() {
-	this.maxAnimationCounter = (TickrateMultiplayer*64)/this.animationFrames.length;
-	if (this.currentAnimationCounter == this.maxAnimationCounter) {
+	this.maxAnimationCounter = 64*this.animationDurationMultiplayer/this.animationFrames.length;
+	if (this.currentAnimationCounter >= this.maxAnimationCounter) {
 		++this.currentAnimationFrame;
-		this.object.changeTexture(this.animationFrames[this.currentAnimationFrame%this.animationFrames.length]);
+		this.currentAnimationFrame %= this.animationFrames.length;
+		this.object.changeTexture(this.animationFrames[this.currentAnimationFrame]);
 		this.currentAnimationCounter = 0;
 	}
-	++this.currentAnimationCounter;
+	this.currentAnimationCounter += 1 * GameSpeed;
 }
 
 position(x, y) {
@@ -61,8 +63,8 @@ target(x, y) {	// Calculate vector to target
 }
 
 goToTarget() {
-	this.Group.position.x += this.dirVX * this.speed * GameSpeed;
-	this.Group.position.y += this.dirVY * this.speed * GameSpeed;
+	this.Group.position.x += this.dirVX * this.speed * GameSpeed * TickrateMultiplayer;
+	this.Group.position.y += this.dirVY * this.speed * GameSpeed * TickrateMultiplayer;
 }
 
 addToScene() {

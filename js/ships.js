@@ -20,7 +20,7 @@ const buildShips = () => {
 	secondShip.addHitbox(new Hitbox(0, 0, 2.5, 2.5));
 	shipTab.push(secondShip);
 
-	console.log(shipTab);
+	//console.log(shipTab);
 }
 
 

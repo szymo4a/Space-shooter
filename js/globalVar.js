@@ -41,7 +41,6 @@
 
 		let CurrentShip = 0;
 
-		//let Tickrate = 64;
 		let Tickrate = 128;
 		let TickrateMultiplayer = 1;
 		let Music = true;
@@ -77,6 +76,9 @@
 		let settingsSFXTextureOn;
 		let settingsSFXTextureOff;
 		let settingsBackTexture;
+
+		let settingsMenuTexture;
+		
 
 		let startingShipTexture1;
 		let startingShipTexture2;
@@ -137,4 +139,58 @@
     		scene.remove(scene.children[0]); 
 		}
 	}
+//
+
+// Camera shake
+
+
+	const smallShotShake = 20;
+	const bigShotShake = 60;
+
+	camera.target = {};
+	camera.target.x = 0;
+	camera.target.y = 0;
+	camera.acceleration = {};
+	camera.acceleration.x = 0;
+	camera.acceleration.y = 0;
+	camera.returnSpeed = 7;
+	camera.damper = 2;
+	camera.speed = 0.05;
+	camera.strength = 0;
+	camera.strengthMultiplayer = {};
+	camera.strengthMultiplayer.x = 2;
+	camera.strengthMultiplayer.y = 2;
+
+	const cameraShake = () => {
+		requestAnimationFrame(cameraShake);
+
+		if (GameSpeed) {			
+
+			camera.acceleration.x = (camera.target.x - camera.position.x) * (camera.returnSpeed);
+			camera.acceleration.y = (camera.target.y - camera.position.y) * (camera.returnSpeed);
+
+			if (camera.strength > 80) {
+
+				camera.strength = 60;
+			}
+				//console.log(camera.strength);
+			if (camera.strength > 0) {
+
+				camera.acceleration.x += Math.random() * camera.strengthMultiplayer.x * camera.strength - camera.strength;
+				camera.acceleration.y += Math.random() * camera.strengthMultiplayer.y * camera.strength - camera.strength;
+				camera.strength -= camera.damper;
+			} else {
+				// bardziej plynna:
+				//		camera.position.x = camera.target.x;
+				//		camera.position.y = camera.target.y;
+				// 		oraz zmien wyzej na camera.acceleration.x += (camera.target.x - camera.position.x) * (camera.returnSpeed);
+				
+				camera.strength = 0;
+			}
+
+			camera.position.x += camera.acceleration.x*camera.speed;
+			camera.position.y += camera.acceleration.y*camera.speed;
+		}
+	}
+	cameraShake();
 //

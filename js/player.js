@@ -6,7 +6,7 @@ class Player {
 
 constructor (ship) {
 
-	this.ammo = 0;
+	this.ammo = 10;
 	this.currentMaxAmmo = 10;
 	this.maxAmmo = 20;
 	this.forceThreshold = 64;
@@ -16,7 +16,7 @@ constructor (ship) {
 	this.recoil = 0;
 
 	this.currentXDirection = 1;
-	this.XSpeed = 0.08 * PlayerSpeed * GameSpeed * TickrateMultiplayer;
+	this.XSpeed = 0.1 * PlayerSpeed * GameSpeed * TickrateMultiplayer;
 
 
 	ship.texture.magFilter = THREE.NearestFilter;
@@ -30,8 +30,9 @@ constructor (ship) {
 		this.Group.add(this.hitboxTab[i].box)
 	}
 
+	this.animationDurationMultiplayer = 0.5;
 	this.animationFrames = ship.animationFrameTab;
-	this.maxAnimationCounter = (TickrateMultiplayer*64)/this.animationFrames.length;
+	this.maxAnimationCounter = 64*this.animationDurationMultiplayer/this.animationFrames.length;
 	this.currentAnimationCounter = 0;
 	this.currentAnimationFrame = 0;
 	for (let i = 0; i < this.animationFrames.length; i++) {
@@ -39,7 +40,7 @@ constructor (ship) {
 		this.animationFrames[i].minFilter = THREE.NearestFilter;
 	}
 
-	console.log(this.animationFrames);
+	//console.log(this.animationFrames);
 }
 
 changeShip(ship) {
@@ -64,7 +65,7 @@ changeShip(ship) {
 	this.Group.position.z = posTp[2];
 
 	this.animationFrames = ship.animationFrameTab;
-	this.maxAnimationCounter = (TickrateMultiplayer*64)/this.animationFrames.length;
+	this.maxAnimationCounter = 64*this.animationDurationMultiplayer/this.animationFrames.length;
 	this.currentAnimationCounter = 0;
 	this.currentAnimationFrame = 0;
 	for (let i = 0; i < this.animationFrames.length; i++) {
@@ -76,13 +77,14 @@ changeShip(ship) {
 }
 
 animate() {
-	this.maxAnimationCounter = (TickrateMultiplayer*64)/this.animationFrames.length;
-	if (this.currentAnimationCounter == this.maxAnimationCounter) {
+	this.maxAnimationCounter = 64*this.animationDurationMultiplayer/this.animationFrames.length;
+	if (this.currentAnimationCounter >= this.maxAnimationCounter) {
 		++this.currentAnimationFrame;
-		this.object.changeTexture(this.animationFrames[this.currentAnimationFrame%this.animationFrames.length]);
+		this.currentAnimationFrame %= this.animationFrames.length;
+		this.object.changeTexture(this.animationFrames[this.currentAnimationFrame]);
 		this.currentAnimationCounter = 0;
 	}
-	++this.currentAnimationCounter;
+	this.currentAnimationCounter += 1 * PlayerSpeed * GameSpeed;
 }
 
 clearGroup() {
@@ -105,7 +107,7 @@ changeXDirection(){
 }
 
 move(){
-	this.XSpeed = 0.08 * PlayerSpeed * GameSpeed * TickrateMultiplayer;
+	this.XSpeed = 0.1 * PlayerSpeed * GameSpeed * TickrateMultiplayer;
 	this.Group.position.x += this.XSpeed * this.currentXDirection;
 
 	this.Group.position.y = -12 - this.recoil;
@@ -122,9 +124,10 @@ shoot(force) {
 
 	if (force >= this.forceThreshold) {
 
-		console.log('BigShot');
+		//console.log('BigShot');
+		camera.strength += bigShotShake;
 		this.ammo -= this.BigShotCost;
-		this.stunned = 16 * TickrateMultiplayer;
+		this.stunned = 12;
 		this.changeXDirection();
 
 		this.addRecoil(0.75);
@@ -138,9 +141,10 @@ shoot(force) {
 
 	} else if (force > 0){
 
-		console.log('SmolShot');
+		//console.log('SmolShot');
+		camera.strength += smallShotShake;
 		this.ammo -= this.SmolShotCost;
-		this.stunned = 8 * TickrateMultiplayer;
+		this.stunned = 4;
 		this.changeXDirection();
 
 		this.addRecoil(0.15);
